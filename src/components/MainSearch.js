@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AdvancedSearch from './AdvancedSearch';
 import credentials from '../credentials';
+import swal from 'sweetalert';
 import axios from 'axios';
 
 const MainSearch = () => {
@@ -9,10 +10,6 @@ const MainSearch = () => {
     const [searcher, setSearcher] = useState(null);
     const [hits, setHits] = useState([]);
     console.log(hits, searcher)
-
-    const handleChange = value => {
-        value.trim().length > 0  && setSearcher(value.trim())
-    }
 
     const handleClick = () => {
         if (searcher) {
@@ -25,7 +22,14 @@ const MainSearch = () => {
                     console.log(error)
                 })
         } else {
-            console.log(false)
+            swal({
+                title: "Oops!, something went wrong",
+                text: "You must enter your search",
+                icon: "error",
+                button: "I get it!",
+                dangerMode: true,
+                closeOnClickOutside: false
+            });
         }
     }
 
@@ -51,7 +55,7 @@ const MainSearch = () => {
                             className="form-control mr-sm-2"
                             placeholder="Enter your search"
                             type="text"
-                            onChange={event => handleChange(event.target.value)}
+                            onChange={event => setSearcher(event.target.value.trim())}
                         />
                         <button className="btn btn-secondary my-2 my-sm-0" type="button" onClick={handleClick}>Search</button>
                     </form>
