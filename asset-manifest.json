@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/edamam-recipe-search-api/static/css/main.74e3e73b.chunk.css",
+    "main.js": "/edamam-recipe-search-api/static/js/main.a4b0de4a.chunk.js",
+    "main.js.map": "/edamam-recipe-search-api/static/js/main.a4b0de4a.chunk.js.map",
+    "runtime-main.js": "/edamam-recipe-search-api/static/js/runtime-main.2fc13d39.js",
+    "runtime-main.js.map": "/edamam-recipe-search-api/static/js/runtime-main.2fc13d39.js.map",
+    "static/js/2.f69ad758.chunk.js": "/edamam-recipe-search-api/static/js/2.f69ad758.chunk.js",
+    "static/js/2.f69ad758.chunk.js.map": "/edamam-recipe-search-api/static/js/2.f69ad758.chunk.js.map",
+    "index.html": "/edamam-recipe-search-api/index.html",
+    "precache-manifest.fa6d330c66508a9cc55b77518833e7ad.js": "/edamam-recipe-search-api/precache-manifest.fa6d330c66508a9cc55b77518833e7ad.js",
+    "service-worker.js": "/edamam-recipe-search-api/service-worker.js",
+    "static/css/main.74e3e73b.chunk.css.map": "/edamam-recipe-search-api/static/css/main.74e3e73b.chunk.css.map",
+    "static/js/2.f69ad758.chunk.js.LICENSE.txt": "/edamam-recipe-search-api/static/js/2.f69ad758.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2fc13d39.js",
+    "static/js/2.f69ad758.chunk.js",
+    "static/css/main.74e3e73b.chunk.css",
+    "static/js/main.a4b0de4a.chunk.js"
+  ]
+}
