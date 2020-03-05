@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdvancedSearch from './AdvancedSearch';
+import Recipes from './Recipes';
+import Spinner from './Spinner';
 import credentials from '../credentials';
 import swal from 'sweetalert';
 import axios from 'axios';
@@ -7,20 +9,52 @@ import axios from 'axios';
 const MainSearch = () => {
 
     const { app_id, app_key } = credentials;
-    const [searcher, setSearcher] = useState(null);
+    const [search, setSearch] = useState(null);
+    const [URL, setURL] = useState(null);
     const [hits, setHits] = useState([]);
-    console.log(hits, searcher)
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        (() => {
+            if (URL) {
+                setHits([]);
+                setLoading(true);
+                axios.get(URL)
+                    .then(response => {
+                        if (response.data.hits.length > 0) {
+                            setHits(response.data.hits);
+                            setLoading(false);
+                        } else {
+                            setHits([]);
+                            setLoading(false);
+                            swal({
+                                title: "Oops!, we are sorry",
+                                text: "We can't find what you're looking for",
+                                icon: "warning",
+                                button: "I get it!",
+                                closeOnClickOutside: false
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        setLoading(false);
+                        swal({
+                            title: "Oops!, something went wrong",
+                            text: "It is not possible to connect to the server",
+                            icon: "error",
+                            button: "I get it!",
+                            dangerMode: true,
+                            closeOnClickOutside: false
+                        });
+                    })
+            }
+        })();
+    }, [URL]);
 
     const handleClick = () => {
-        if (searcher) {
-            const URL = `https://api.edamam.com/search?q=chicken&app_id=${app_id}&app_key=${app_key}`;
-            axios.get(URL)
-                .then(response => {
-                    setHits(response.data.hits);
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+        if (search) {
+            const simpleURL = `https://api.edamam.com/search?q=${search}&app_id=${app_id}&app_key=${app_key}`;
+            setURL(simpleURL);
         } else {
             swal({
                 title: "Oops!, something went wrong",
@@ -30,6 +64,7 @@ const MainSearch = () => {
                 dangerMode: true,
                 closeOnClickOutside: false
             });
+            setURL(null);
         }
     }
 
@@ -55,13 +90,16 @@ const MainSearch = () => {
                             className="form-control mr-sm-2"
                             placeholder="Enter your search"
                             type="text"
-                            onChange={event => setSearcher(event.target.value.trim())}
+                            onChange={event => setSearch(event.target.value.trim())}
                         />
                         <button className="btn btn-secondary my-2 my-sm-0" type="button" onClick={handleClick}>Search</button>
                     </form>
                 </div>
             </nav>
-            <AdvancedSearch searcher={searcher} />
+            <AdvancedSearch search={search} />
+            {hits.length > 0 && <Recipes hits={hits} />}
+            {loading && <Spinner />}
+
         </>
     );
 
