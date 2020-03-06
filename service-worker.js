@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/edamam-recipe-search-api/precache-manifest.fa6d330c66508a9cc55b77518833e7ad.js"
+  "/edamam-recipe-search-api/precache-manifest.af84052ade0365cedacebb38a045d2b2.js"
 );
 
 self.addEventListener('message', (event) => {
