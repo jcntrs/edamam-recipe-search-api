@@ -96,10 +96,9 @@ const MainSearch = () => {
                     </form>
                 </div>
             </nav>
-            <AdvancedSearch search={search} />
+            <AdvancedSearch search={search} setSearch={setSearch} setURL={setURL} />
             {hits.length > 0 && <Recipes hits={hits} />}
             {loading && <Spinner />}
-
         </>
     );
 
